@@ -56,9 +56,22 @@ void loop() {
   curMillis = millis();
   getDataFromPC();
   replyToPC();
-  if(curMillis - previousMillis >= INTERVAL*1000) {
+  if(curMillis - previousMillis >= INTERVAL*1) {
     previousMillis = curMillis;
-    // periodicky vykonavany kod...
+    analogWrite(9, rgb[0]);//Geek R
+    analogWrite(6, rgb[1]);//Geek G
+    analogWrite(5, rgb[2]);//Geek B
+    analogWrite(3, rgb[3]);//Lab R
+    analogWrite(10, rgb[4]);//Lab G
+    analogWrite(11, rgb[5]);//Lab B
+    
+    digitalWrite(7, pismeno[0]);//G
+    digitalWrite(A3, pismeno[1]);//E
+    digitalWrite(A2, pismeno[2]);//E
+    digitalWrite(A1, pismeno[3]);//K
+    digitalWrite(A0, pismeno[4]);//L
+    digitalWrite(13, pismeno[5]);//A
+    digitalWrite(12, pismeno[6]);//B
   }
 }
 
