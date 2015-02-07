@@ -113,7 +113,7 @@ void getDataFromPC() {
 void replyToPC() {
   if (newDataFromPC) {
     newDataFromPC = false;
-    #ifdef DEBUF
+    #ifdef DEBUG
       Serial.print(F("< POZADAVEK: "));
       Serial.print(messageFromPC);
       Serial.println(">");
