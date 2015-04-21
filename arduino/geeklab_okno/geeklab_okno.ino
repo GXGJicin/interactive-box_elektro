@@ -14,6 +14,7 @@ unsigned long prevReplyToPCmillis = 0;
 unsigned long replyToPCinterval = 1000;
 unsigned long previousMillis = 0;
 
+unsigned long previousMillisZhasinani = 0;
 
 const byte buffSize = 50;
 char inputBuffer[buffSize];
@@ -65,13 +66,19 @@ void loop() {
     analogWrite(10, rgb[4]);//Lab G
     analogWrite(11, rgb[5]);//Lab B
     
-    digitalWrite(7, pismeno[0]);//G
+    digitalWrite(7,  pismeno[0]);//G
     digitalWrite(A3, pismeno[1]);//E
     digitalWrite(A2, pismeno[2]);//E
     digitalWrite(A1, pismeno[3]);//K
     digitalWrite(A0, pismeno[4]);//L
     digitalWrite(13, pismeno[5]);//A
     digitalWrite(12, pismeno[6]);//B
+  }
+  if(curMillis - previousMillisZhasinani >= 30000) {
+    previousMillisZhasinani = curMillis;
+    for (byte i=0; i <=6; i++) {
+      pismeno[i] = 0;
+    }
   }
 }
 
@@ -147,6 +154,7 @@ void parseData() {  //           pouzivane prikazy:       <RGB,128,128,128,128,1
         strtokIndx = strtok(NULL, ","); // this continues where the previous call left off
         int value = atoi(strtokIndx);     // convert this part to an integer
         pismeno[i] = byte(value);
+        previousMillisZhasinani = curMillis;
         i++;
       }
   } else if( strstr("TEPLOTA", messageFromPC) != NULL ) { // <DUMP>
